@@ -19,3 +19,13 @@ export type Trim<String extends string> =
         : String extends (`${infer NewString} ` | `${infer NewString}\t` | `${infer NewString}\n`)
                 ? Trim<NewString>
                 : String;
+
+
+export type Reverse<Array extends any[]> =
+    Array extends []
+        ? []
+        : Array extends [any]
+            ? Array
+            : Array extends [...infer NewArray,infer LastElement]
+                ? [LastElement,...Reverse<NewArray>]
+                : never;
